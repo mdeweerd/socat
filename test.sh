@@ -12335,7 +12335,7 @@ if [ "$ERRNOENT" ]; then
     let numFAIL=numFAIL+1
     listFAIL="$listFAIL $N"
 elif [ "$user" != "$SUBSTUSER" ]; then
-    $PRINTF "${FAILD}(user \"$user\", expected \"$SUBSTUSER\")\n"
+    $PRINTF "${FAILED}(user \"$user\", expected \"$SUBSTUSER\")\n"
     echo "$CMD0 &"
     cat "$te0" >&2
     let numFAIL=numFAIL+1
