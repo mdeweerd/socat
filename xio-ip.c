@@ -458,7 +458,7 @@ int xioresolve(const char *node, const char *service,
 }
 
 #if defined(HAVE_STRUCT_CMSGHDR) && defined(CMSG_DATA)
-/* Converts the ancillary message in *cmsg into a form useable for further
+/* Converts the ancillary message in *cmsg into a form usable for further
    processing. knows the specifics of common message types.
    These are valid for IPv4 and IPv6
    Returns the number of resulting syntax elements in *num

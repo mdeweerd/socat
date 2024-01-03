@@ -311,7 +311,7 @@ int _xioopen_ipapp_listen_prepare(
 
    retropt_string(opts, OPT_BIND, &bindname);
 
-   /* Set AI_PASSIVE, except when it is explicitely disabled */
+   /* Set AI_PASSIVE, except when it is explicitly disabled */
    ai_flags2[0] = ai_flags[0];
    ai_flags2[1] = ai_flags[1];
    if (!(ai_flags2[1] & AI_PASSIVE))

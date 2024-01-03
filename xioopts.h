@@ -150,7 +150,7 @@ enum e_func {
 #define GROUP_NONE	0x00000000
 #define GROUP_ADDR	0x00000000 	/* options that apply to all addresses */
 
-#define GROUP_FD	0x00000001	/* everything applyable to a fd */
+#define GROUP_FD	0x00000001	/* everything applicable to a fd */
 #define GROUP_FIFO	0x00000002
 #define GROUP_CHR	0x00000004 	/* not yet used? */
 #define GROUP_BLK	0x00000008

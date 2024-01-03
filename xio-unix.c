@@ -15,7 +15,7 @@
 
 #if WITH_UNIX
 
-/* to avoid unneccessary runtime if () conditionals when no abstract support is
+/* to avoid unnecessary runtime if () conditionals when no abstract support is
    compiled in (or at least to give optimizing compilers a good chance) we need
    a constant that can be used in C expressions */
 #if WITH_ABSTRACT_UNIXSOCKET
@@ -33,7 +33,7 @@ static int xioopen_unix_client(int argc, const char *argv[], struct opt *opts, i
 
 /* the first free parameter is 0 for "normal" unix domain sockets, or 1 for
    abstract unix sockets (Linux); the second and third free parameter are
-   unsused */
+   unused */
 const struct addrdesc xioaddr_unix_connect = { "UNIX-CONNECT",  1+XIO_RDWR,   xioopen_unix_connect,  GROUP_FD|GROUP_NAMED|GROUP_SOCKET|GROUP_SOCK_UNIX|GROUP_RETRY,                          0, 0, 0 HELP(":<filename>") };
 #if WITH_LISTEN
 const struct addrdesc xioaddr_unix_listen  = { "UNIX-LISTEN",   1+XIO_RDWR,   xioopen_unix_listen,   GROUP_FD|GROUP_NAMED|GROUP_SOCKET|GROUP_SOCK_UNIX|GROUP_LISTEN|GROUP_CHILD|GROUP_RETRY, 0, 0, 0 HELP(":<filename>") };
@@ -837,7 +837,7 @@ static const char tmpchars[] =
 	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 static size_t numchars = sizeof(tmpchars)-1;
 
-/* Simplyfied version of tempnam(). Uses the current directory when pathx is
+/* Simplified version of tempnam(). Uses the current directory when pathx is
    not absolute.
    Returns a malloc()'ed string with a probably free name,
    or NULL when an error occurred */

@@ -393,7 +393,7 @@ int filan_stat(
       break;
 #ifdef S_IFLNK
    case (S_IFLNK):	/* 10, symbolic link */
-      /* we wait for freadlink() sytem call */
+      /* we wait for freadlink() system call */
       break;
 #endif /* S_IFLNK */
       break;

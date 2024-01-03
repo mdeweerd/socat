@@ -17,7 +17,7 @@ extern char **environ;
    socket()
    connect() -> Connection refused
    connect() -> ok
-   instead, it needs close() and socket() between the two connect() attmpts: */
+   instead, it needs close() and socket() between the two connect() attempts: */
 #if __FreeBSD__ || __APPLE__ || _AIX || __hpux__ || __osf__
 #  undef SOCKET_CAN_RECOVER
 #else

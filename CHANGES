@@ -106,11 +106,11 @@ Features:
 	no IP version is preferred by build, environment, option, or address
 	type, Socat chooses IPv6 because this might activate both versions (but
 	check option ipv6-v6only).
-	Added option ai-passive to control this flag explicitely.
+	Added option ai-passive to control this flag explicitly.
 
 	New option ai-v4mapped (v4mapped) sets or unsets the AI_V4MAPPED flag
 	of the resolver. For Socat addresses requiring IPv6 addresses, this
-	resolves IPv4 addresses to the approriate IPv6 address [::ffff:*:*].
+	resolves IPv4 addresses to the appropriate IPv6 address [::ffff:*:*].
 
 	DNS resolver Options (res-*) are now set for the complete open phase of
 	the address, not per getaddrinfo() invocation.
@@ -303,14 +303,14 @@ Porting:
 	Some corrections for better 32bit systems support.
 
 Testing:
-	Removed obselete parts from test.sh
+	Removed obsolete parts from test.sh
 
 	test.sh: Introduced function checkcond
 
 	Renamed test.sh option -foreign to -internet
 
 Documentation:
-	Removed obselete file doc/xio.help
+	Removed obsolete file doc/xio.help
 
 	Added doc for option ipv6-join-group (ipv6-add-membership)
 	Thanks to Martin Buck for sending the patch.
@@ -323,7 +323,7 @@ Documentation:
 
 Corrections:
 	On connect() failure and in some other situations Socat tries to get
-	detailled information about the error with recvmsg(). Error return of
+	detailed information about the error with recvmsg(). Error return of
 	this function is now logged as Info instead of Warn.
 
 	Tests of the correction of the "IP_ADD_SOURCE_MEMBERSHIP but not struct
@@ -367,7 +367,7 @@ Corrections:
 	Thanks to Gordon W.Ross for reporting and fixing this issue.
 	Test: RESTORE_TTY
 
-	The OpenSSL client SNI parameter, when not explicitely specified, is
+	The OpenSSL client SNI parameter, when not explicitly specified, is
 	derived from option commonname or rom target server name. This is not
 	useful with IP addresses, which Socat now checks and avoids.
 
@@ -398,7 +398,7 @@ Coding:
 
 	fcntl() trace prints flags now in hexadecimal.
 
-	Stream dump options -r and -R now open their pathes with CLOEXEC to
+	Stream dump options -r and -R now open their paths with CLOEXEC to
 	prevent leaking into sub processes.
 	Test: EXEC_SNIFF
 
@@ -697,7 +697,7 @@ Corrections:
 	Print a message when readbytes option causes EOF
 
 	The ip-recverr option had no effect. Corrected and improved its
-	handling of ancilliary messages, so it is able to analyze ICMP error
+	handling of ancillary messages, so it is able to analyze ICMP error
 	packets (Linux only?)
 
 	Setgui(), Setuid() calls in xio-progcall.c were useless.
@@ -835,7 +835,7 @@ Porting:
 	ai_protocol=0 and try again
 	Test: SCTP_SERVICENAME
 
-	Per file filesystem options were still named ext2-* and depended on
+	Per file filesystem options were still named ext2-* and dependent on
 	<linux/ext2_fs.h>. Now they are called fs-* and depend on <linux/fs.h>.
 	These fs-* options are also available on old systems with ext2_fs.h
 
@@ -848,14 +848,14 @@ Porting:
 	SSL_library_init.
 
 	With OPENSSL_API_COMPAT=0x10000000L the files openssl/dh.h, openssl/bn.h
-	must explicitely be included.
+	must explicitly be included.
 	Thanks to Rosen Penev for reporting and sending a patch.
 
 Testing:
 	test.sh now produces a list of tests that could not be performed for
 	any reason. This helps to analyse these cases.
 
-	OpenSSL s_server appearently started to neglect TCPs half close feature.
+	OpenSSL s_server apparently started to neglect TCPs half close feature.
 	Test OPENSSL_TCP4 has been changed to tolerate this.
 
 	OpenSSL changed its behaviour when connection is rejected. Tests
@@ -1049,7 +1049,7 @@ Corrections:
 Porting:
 	OpenSSL functions TLS1_client_method() and similar are 
 	deprecated. Socat now uses recommended TLS_client_method(). The old
-	functions and dependend option openssl-method can still be
+	functions and dependent option openssl-method can still be
 	used when configuring socat with --enable-openssl-method
 
 	Shell scripts in socat distribution are now headed with:
@@ -1091,7 +1091,7 @@ Testing:
 	More corrections to test.sh:
 	Language settings could still influence test results
 	netstat was still required
-	Suppress usleep deprecated messag
+	Suppress usleep deprecated message
 	Force use of IPv4 with some certificates
 	Set timeout for UDPxMAXCHILDREN tests
 
@@ -1286,7 +1286,7 @@ security:
 	parameters were chosen, the existence of a trapdoor that makes possible
 	for an eavesdropper to recover the shared secret from a key exchange
 	that uses them cannot be ruled out.
-	Futhermore, 1024bit is not considered sufficiently secure.
+	Furthermore, 1024bit is not considered sufficiently secure.
 	Fix: generated a new 2048bit prime.
 	Thanks to Santiago Zanella-Beguelin and Microsoft Vulnerability
 	Research (MSVR) for finding and reporting this issue.
@@ -1300,7 +1300,7 @@ security:
 	safe functions in signal handlers that could freeze socat, allowing
 	denial of service attacks.
 	Many changes in signal handling and the diagnostic messages system were
-	applied to make the code async signal safe but still provide detailled
+	applied to make the code async signal safe but still provide detailed
 	logging from signal handlers:
 	Coded function vsnprintf_r() as async signal safe incomplete substitute
 	of libc vsnprintf()
@@ -1388,7 +1388,7 @@ corrections:
 	Issue reported by Hendrik.
 
 	Added option termios-cfmakeraw that calls cfmakeraw() and is preferred
-	over option raw which is now obsolote. On SysV systems this call is
+	over option raw which is now obsolete. On SysV systems this call is
 	simulated by appropriate setting.
 	Thanks to Youfu Zhang for reporting issue with option raw.
 
@@ -1401,7 +1401,7 @@ porting:
 	Thanks to Ross Burton and Danomi Manchego for reporting this issue.
 
 	Debian Bug#764251: Set the build timestamp to a deterministic time:
-	support external BUILD_DATE env var to allow to build reproducable
+	support external BUILD_DATE env var to allow to build reproducible
 	binaries
 
 	Joachim Fenkes provided an new adapted spec file.
@@ -1522,7 +1522,7 @@ porting:
 	autoconf now prefers configure.ac over configure.in
 	Thanks to Michael Vastola for sending a patch.
 
-	type of struct cmsghdr.cmsg is system dependend, determine it with
+	type of struct cmsghdr.cmsg is system dependent, determine it with
 	configure; some more print format corrections
 
 docu:
@@ -1576,7 +1576,7 @@ corrections:
 	socket using address GOPEN. Thanks to Martin Forssen for bug report and
 	patch.
 
-	UDP-LISTEN would alway set SO_REUSEADDR even without fork option and
+	UDP-LISTEN would always set SO_REUSEADDR even without fork option and
 	when user set it to 0. Thanks to Michal Svoboda for reporting this bug.
 
 	UNIX-CONNECT did not support half-close. Thanks to Greg Hughes who
@@ -1809,7 +1809,7 @@ new features:
 
 	added generic socket addresses: SOCKET-CONNECT, SOCKET-LISTEN,
 	SOCKET-SENDTO, SOCKET-RECVFROM, SOCKET-RECV, SOCKET-DATAGRAM allow
-	protocol independent socket handling; all parameters are explicitely
+	protocol independent socket handling; all parameters are explicitly
 	specified as numbers or hex data
 
 	added address options ioctl-void, ioctl-int, ioctl-intp, ioctl-string,
@@ -1882,7 +1882,7 @@ corrections:
 	this bug). test: EXECSPACES
 
 	in ignoreeof polling mode socat also blocked data transfer in the other
-	direction during the 1s wait intervalls (thanks to Jorgen Cederlof for
+	direction during the 1s wait intervals (thanks to Jorgen Cederlof for
 	reporting this bug)
 
 	corrected alphabetical order of options (proxy-auth)
@@ -2308,7 +2308,7 @@ corrections:
 
 	check for /proc at runtime, even if configure found it
 
-	src.rpm accidently supported SuSE instead of RedHat
+	src.rpm accidentally supported SuSE instead of RedHat
 
 ####################### V 1.3.2.0:
 
@@ -2584,7 +2584,7 @@ solved problems and bugs:
 	SOLVED: now uses common TCP service resolver
 
 	PROBLEM: with PIPE, wrong FDs were shown for data transfer loop
-	SOLVED: retrieval of FDs now pays respect to PIPE pecularities
+	SOLVED: retrieval of FDs now pays respect to PIPE peculiarities
 
 	PROBLEM: using address EXEC against an address with IGNOREEOF, socat
 		never terminated

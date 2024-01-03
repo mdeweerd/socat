@@ -1737,7 +1737,7 @@ int xiocheckpeer(xiosingle_t *sfd,
 
 
 #if HAVE_STRUCT_CMSGHDR
-/* converts the ancillary message in *cmsg into a form useable for further
+/* converts the ancillary message in *cmsg into a form usable for further
    processing. knows the specifics of common message types.
    returns the number of resulting syntax elements in *num
    returns a sequence of \0 terminated type strings in *typbuff
@@ -1958,7 +1958,7 @@ int xioparserange(
       return -1;
    }
    /* we have parsed the address and mask; now we make sure that the stored
-      address has 0 where mask is 0, to simplify comparisions */
+      address has 0 where mask is 0, to simplify comparisons */
    switch (pf) {
 #if WITH_IP4
    case PF_INET:
@@ -2296,7 +2296,7 @@ int xiobind(
    Socat option so-reuseaddr:
    Option not applied: set it to 1
    Option applied with a value: set it to the value
-   Option applied eith empty value "so-reuseaddr=": do not call setsockopt() for
+   Option applied with empty value "so-reuseaddr=": do not call setsockopt() for
    SO_REUSEADDR
    Return 0 on success, or -1 with errno when an error occurred.
  */

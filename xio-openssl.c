@@ -5,7 +5,7 @@
 /* this file contains the implementation of the openssl addresses */
 
 #include "xiosysincludes.h"
-#if WITH_OPENSSL	/* make this address configure dependend */
+#if WITH_OPENSSL	/* make this address configure dependent */
 #include <openssl/conf.h>
 #include <openssl/x509v3.h>
 
@@ -268,7 +268,7 @@ static int xioopen_openssl_connect(
    hostname = argv[1];
    portname = argv[2];
    if (hostname[0] == '\0') {
-      /* we catch this explicitely because empty commonname (peername) disables
+      /* we catch this explicitly because empty commonname (peername) disables
 	 commonName check of peer certificate */
       Error1("%s: empty host name", argv[0]);
       return STAT_NORETRY;
@@ -809,7 +809,7 @@ int _xioopen_openssl_listen(struct single *sfd,
 
 #if OPENSSL_VERSION_NUMBER >= 0x00908000L
 /* In OpenSSL 0.9.7 compression methods could be added using
- * SSL_COMP_add_compression_method(3), but the implemntation is not compatible
+ * SSL_COMP_add_compression_method(3), but the implementation is not compatible
  * with the standard (RFC3749).
  */
 static int openssl_setup_compression(SSL_CTX *ctx, char *method)

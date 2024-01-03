@@ -105,7 +105,7 @@ Corrections:
 Porting:
 	OpenSSL functions TLS1_client_method() and similar are 
 	deprecated. Socat now uses recommended TLS_client_method(). The old
-	functions and dependend option openssl-method can still be
+	functions and dependent option openssl-method can still be
 	used when configuring socat with --enable-openssl-method
 
 	Shell scripts in socat distribution are now headed with:
@@ -147,7 +147,7 @@ Testing:
 	More corrections to test.sh:
 	Language settings could still influence test results
 	netstat was still required
-	Suppress usleep deprecated messag
+	Suppress usleep deprecated message
 	Force use of IPv4 with some certificates
 	Set timeout for UDPxMAXCHILDREN tests
 
@@ -339,7 +339,7 @@ security:
 	parameters were chosen, the existence of a trapdoor that makes possible
 	for an eavesdropper to recover the shared secret from a key exchange
 	that uses them cannot be ruled out.
-	Futhermore, 1024bit is not considered sufficiently secure.
+	Furthermore, 1024bit is not considered sufficiently secure.
 	Fix: generated a new 2048bit prime.
 	Thanks to Santiago Zanella-Beguelin and Microsoft Vulnerability
 	Research (MSVR) for finding and reporting this issue.
@@ -353,7 +353,7 @@ security:
 	safe functions in signal handlers that could freeze socat, allowing
 	denial of service attacks.
 	Many changes in signal handling and the diagnostic messages system were
-	applied to make the code async signal safe but still provide detailled
+	applied to make the code async signal safe but still provide detailed
 	logging from signal handlers:
 	Coded function vsnprintf_r() as async signal safe incomplete substitute
 	of libc vsnprintf()
@@ -441,7 +441,7 @@ corrections:
 	Issue reported by Hendrik.
 
 	Added option termios-cfmakeraw that calls cfmakeraw() and is preferred
-	over option raw which is now obsolote. On SysV systems this call is
+	over option raw which is now obsolete. On SysV systems this call is
 	simulated by appropriate setting.
 	Thanks to Youfu Zhang for reporting issue with option raw.
 
@@ -454,7 +454,7 @@ porting:
 	Thanks to Ross Burton and Danomi Manchego for reporting this issue.
 
 	Debian Bug#764251: Set the build timestamp to a deterministic time:
-	support external BUILD_DATE env var to allow to build reproducable
+	support external BUILD_DATE env var to allow to build reproducible
 	binaries
 
 	Joachim Fenkes provided an new adapted spec file.
@@ -575,7 +575,7 @@ porting:
 	autoconf now prefers configure.ac over configure.in
 	Thanks to Michael Vastola for sending a patch.
 
-	type of struct cmsghdr.cmsg is system dependend, determine it with
+	type of struct cmsghdr.cmsg is system dependent, determine it with
 	configure; some more print format corrections
 
 docu:
@@ -629,7 +629,7 @@ corrections:
 	socket using address GOPEN. Thanks to Martin Forssen for bug report and
 	patch.
 
-	UDP-LISTEN would alway set SO_REUSEADDR even without fork option and
+	UDP-LISTEN would always set SO_REUSEADDR even without fork option and
 	when user set it to 0. Thanks to Michal Svoboda for reporting this bug.
 
 	UNIX-CONNECT did not support half-close. Thanks to Greg Hughes who
@@ -862,7 +862,7 @@ new features:
 
 	added generic socket addresses: SOCKET-CONNECT, SOCKET-LISTEN,
 	SOCKET-SENDTO, SOCKET-RECVFROM, SOCKET-RECV, SOCKET-DATAGRAM allow
-	protocol independent socket handling; all parameters are explicitely
+	protocol independent socket handling; all parameters are explicitly
 	specified as numbers or hex data
 
 	added address options ioctl-void, ioctl-int, ioctl-intp, ioctl-string,
@@ -935,7 +935,7 @@ corrections:
 	this bug). test: EXECSPACES
 
 	in ignoreeof polling mode socat also blocked data transfer in the other
-	direction during the 1s wait intervalls (thanks to Jorgen Cederlof for
+	direction during the 1s wait intervals (thanks to Jorgen Cederlof for
 	reporting this bug)
 
 	corrected alphabetical order of options (proxy-auth)
@@ -1361,7 +1361,7 @@ corrections:
 
 	check for /proc at runtime, even if configure found it
 
-	src.rpm accidently supported SuSE instead of RedHat
+	src.rpm accidentally supported SuSE instead of RedHat
 
 ####################### V 1.3.2.0:
 
@@ -1637,7 +1637,7 @@ solved problems and bugs:
 	SOLVED: now uses common TCP service resolver
 
 	PROBLEM: with PIPE, wrong FDs were shown for data transfer loop
-	SOLVED: retrieval of FDs now pays respect to PIPE pecularities
+	SOLVED: retrieval of FDs now pays respect to PIPE peculiarities
 
 	PROBLEM: using address EXEC against an address with IGNOREEOF, socat
 		never terminated

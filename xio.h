@@ -125,7 +125,7 @@ typedef struct xioparms {
 /* pack the description of a lock file */
 typedef struct {
    const char     *lockfile;	/* name of lockfile; NULL if no locking */
-   bool            waitlock;	/* dont't exit when already locked */
+   bool            waitlock;	/* don't exit when already locked */
    struct timespec intervall;	/* polling intervall */
 } xiolock_t;
 

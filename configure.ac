@@ -39,7 +39,7 @@ AC_PROG_RANLIB
 AC_SUBST(AR)
 AC_CHECK_PROG(AR, ar, ar, gar)
 #
-# we need to explicitely call this here; otherwise, with --disable-libwrap we
+# we need to explicitly call this here; otherwise, with --disable-libwrap we
 # fail
 AC_LANG_COMPILER_REQUIRE()
 
@@ -2227,7 +2227,7 @@ AC_TRY_COMPILE([#include <resolv.h>],
 
 dnl "tcpd" "tcpwrappers"
 # on some platforms, raw linking with libwrap fails because allow_severity and
-# deny_severity are not explicitely defined. Thus we put the libwrap part to
+# deny_severity are not explicitly defined. Thus we put the libwrap part to
 # the end
 AC_MSG_CHECKING(whether to include libwrap support)
 AC_ARG_ENABLE(libwrap, [  --disable-libwrap       disable libwrap support],

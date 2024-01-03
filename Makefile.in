@@ -204,5 +204,5 @@ cert:
 	# ...enter fields
 	# generate the pem file
 	cat cert.key cert.crt >cert.pem
-	#echo use cert.pem on requestors side, i.e. with option cert=cert.pem
+	#echo use cert.pem on requesters side, i.e. with option cert=cert.pem
 	#echo use cert.crt on checkers side, i.e. with option cafile=cert.crt

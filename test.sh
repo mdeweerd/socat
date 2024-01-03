@@ -1804,7 +1804,7 @@ N=$((N+1))
 NAME=DUALSTDIO
 case "$TESTS" in
 *%$N%*|*%functions%*|*%stdio%*|*%$NAME%*)
-TEST="$NAME: splitted form of stdio ('stdin!!stdout') with simple echo via internal pipe"
+TEST="$NAME: split form of stdio ('stdin!!stdout') with simple echo via internal pipe"
 testecho "$N" "$TEST" "stdin!!stdout" "pipe" "$opts"
 esac
 N=$((N+1))
@@ -1813,7 +1813,7 @@ N=$((N+1))
 NAME=DUALSHORTSTDIO
 case "$TESTS" in
 *%$N%*|*%functions%*|*%stdio%*|*%$NAME%*)
-TEST="$NAME: short splitted form of stdio ('-!!-') with simple echo via internal pipe"
+TEST="$NAME: short split form of stdio ('-!!-') with simple echo via internal pipe"
 testecho "$N" "$TEST" "-!!-" "pipe" "$opts"
 esac
 N=$((N+1))
@@ -9211,7 +9211,7 @@ N=$((N+1))
 
 
 # test: there is a bug with the readbytes option: when the socket delivered
-# exacly that many bytes as specified with readbytes and the stays idle (no
+# exactly that many bytes as specified with readbytes and the stays idle (no
 # more data, no EOF), socat waits for more data instead of generating EOF on
 # this in put stream.
 NAME=READBYTES_EOF
@@ -9257,7 +9257,7 @@ N=$((N+1))
 NAME=EXECPTYKILL
 case "$TESTS" in
 *%$N%*|*%functions%*|*%bugs%*|*%exec%*|*%pty%*|*%listen%*|*%unix%*|*%fork%*|*%$NAME%*)
-TEST="$NAME: exec:...,pty explicitely kills sub process"
+TEST="$NAME: exec:...,pty explicitly kills sub process"
 # we want to check if the exec'd sub process is killed in time
 # for this we have a shell script that generates a file after two seconds;
 # it should be killed after one second, so if the file was generated the test
@@ -10009,7 +10009,7 @@ IP6  IP6  [::1]     PROTO ipv6-unicast-hops=35 ipv6-recvhoplimit IPV6_HOPLIMIT  
 IP6  IP6  [::1]     PROTO ipv6-tclass=0xaa     ipv6-recvtclass   IPV6_TCLASS    tclass    root x000000aa
 #UNIX UNIX $td/test\$N.server - ,               so-timestamp      SCM_TIMESTAMP  timestamp user timestamp
 "
-# this one fails, appearently due to a Linux weakness:
+# this one fails, apparently due to a Linux weakness:
 # UNIX so-timestamp
 
 
@@ -11819,8 +11819,8 @@ esac
 N=$((N+1))
 
 
-if false; then	# this overflow is not reliably reproducable
-# socat up to 2.0.0-b6 did not check the length of the PROXY-CONNECT command line paramters when copying them into the HTTP request buffer. This could lead to a buffer overflow.
+if false; then	# this overflow is not reliably reproducible
+# socat up to 2.0.0-b6 did not check the length of the PROXY-CONNECT command line parameters when copying them into the HTTP request buffer. This could lead to a buffer overflow.
 NAME=PROXY_ADDR_OVFL
 case "$TESTS" in
 *%$N%*|*%functions%*|*%bugs%*|*%security%*|*%socket%*|*%listen%*|*%$NAME%*)
@@ -12335,7 +12335,7 @@ if [ "$ERRNOENT" ]; then
     let numFAIL=numFAIL+1
     listFAIL="$listFAIL $N"
 elif [ "$user" != "$SUBSTUSER" ]; then
-    $PRINTF "${FAILD}(user \"$user\", expected \"$SUBSTUSER\")\n"
+    $PRINTF "${FAILED}(user \"$user\", expected \"$SUBSTUSER\")\n"
     echo "$CMD0 &"
     cat "$te0" >&2
     let numFAIL=numFAIL+1
@@ -12505,7 +12505,7 @@ case "$TESTS" in
 TEST="$NAME: SYSTEM address does not shutdown its parents addresses"
 # start an OpenSSL echo server using SYSTEM:cat
 # start an OpenSSL client that sends data
-# when the client recieves its data and terminates without error the test succeeded
+# when the client receives its data and terminates without error the test succeeded
 # in case of the bug the client issues an error like:
 # SSL_connect(): error:1408F119:SSL routines:SSL3_GET_RECORD:decryption failed or bad record mac
 if ! eval $NUMCOND; then :;
@@ -13193,7 +13193,7 @@ NAME=DIAG_FDIN
 case "$TESTS" in
 *%$N%*|*%functions%*|*%bugs%*|*%exec%*|*%$NAME%*)
 TEST="$NAME: test use of fdin=3"
-# Use FD 3 explicitely with fdin and test if Socat passes data to executed
+# Use FD 3 explicitly with fdin and test if Socat passes data to executed
 # program
 if ! eval $NUMCOND; then :; else
 tf="$td/test$N.stdout"
@@ -13516,7 +13516,7 @@ if [ $rc -ne 0 ] && grep -q "Invalid argument" "$te" && [ $UNAME = Linux ]; then
 	    cat "$te" >&2
 	    numFAIL=$((numFAIL+1))
 	    listFAIL="$listFAIL $N" ;;
-	*) $PRINTF "${YELLOW}inable file system${NORMAL}\n"
+	*) $PRINTF "${YELLOW}unsupported file system${NORMAL}\n"
 	    numCANT=$((numCANT+1))
 	    listCANT="$listCANT $N" ;;
     esac
@@ -13549,7 +13549,7 @@ case "$TESTS" in
 TEST="$NAME: Option unlink-close with UNIX sendto socket"
 # Have a recv socket with option unlink-close=0
 # and a sendto socket with option unlink-close=1
-# Expected beavior: the recv socket is kept, the
+# Expected behavior: the recv socket is kept, the
 # sendto/bind socket is removed
 if ! eval $NUMCOND; then :; else
 tf="$td/test$N.stdout"
@@ -13592,7 +13592,7 @@ case "$TESTS" in
 TEST="$NAME: Option unlink-close with UNIX connect socket"
 # Have a listen socket with option unlink-close=0
 # and a connect socket with option unlink-close=1
-# Expected beavior: the listen socket entry is kept, the
+# Expected behavior: the listen socket entry is kept, the
 # connect/bind socket is removed
 if ! eval $NUMCOND; then :; else
 tf="$td/test$N.stdout"
@@ -15195,7 +15195,7 @@ for addr in exec system; do
 # Pass two packets to the UNIX datagram socket; let Socat wait a little time
 # before processing,
 # so the packets are at the same time in the receive queue.
-# The process that sends thes packet uses a short packet size (-b),
+# The process that sends these packet uses a short packet size (-b),
 # so the returned data is truncated in case the packets were merged.
 # When the complete data is returned, the test succeeded.
 	if ! eval $NUMCOND; then :; else
@@ -15288,7 +15288,7 @@ elif [ $rc1 -eq 139 ]; then
     numFAIL=$((numFAIL+1))
     listFAIL="$listFAIL $N"
 else
-    # soemthing unexpected happened
+    # something unexpected happened
     $PRINTF "$CANT\n"
     echo "$CMD"
     cat "${te}" >&2
@@ -17016,7 +17016,7 @@ N=$((N+1))
 
 
 
-# Test the POSIX MQ feature with continuous READ and priorization on Linux
+# Test the POSIX MQ feature with continuous READ and prioritization on Linux
 NAME=LINUX_POSIXMQ_READ_PRIO
 case "$TESTS" in
 *%$N%*|*%functions%*|*%socket%*|*%posixmq%*|*%$NAME%*)
@@ -18012,7 +18012,7 @@ CMD0="$TRACE $SOCAT $opts -lp server $SRV:${ts}0,fork PIPE"
 # The following command is the solution: option unix-bind-tempname generates
 # random names (like tempnam(2)) for binding the datagram client socket;
 # creating the XXXXXX file makes sure that the (non abstract) clients cannot
-# erronously bind there (part of the test)
+# erroneously bind there (part of the test)
 CMD1="$TRACE $SOCAT $opts -lp bind-tempname TCP4-LISTEN:$PORT,reuseaddr,fork $CLI:${ts}0,bind=${ts}1"
 touch ${ts}1.XXXXXX; CMD1="$TRACE $SOCAT $opts -lp tempname TCP4-LISTEN:$PORT,reuseaddr,fork $CLI:${ts}0,bind-tempname=${ts}1.XXXXXX"
 CMD2="$TRACE $SOCAT $opts -lp client - TCP4-CONNECT:$LOCALHOST:$PORT"
@@ -19160,7 +19160,7 @@ N=$((N+1))
 #=================================================================================
 # here come tests that might affect your systems integrity. Put normal tests
 # before this paragraph.
-# tests must be explicitely selected by roottough or name (not number)
+# tests must be explicitly selected by roottough or name (not number)
 
 NAME=PTYGROUPLATE
 case "$TESTS" in

@@ -175,7 +175,7 @@ static int xio_nokill(xiofile_t *sock) {
 }
 
 /* call this function immediately after fork() in child process */
-/* it performs some neccessary actions
+/* it performs some necessary actions
    returns 0 on success or != 0 if an error occurred */
 int xio_forked_inchild(void) {
    int result = 0;

@@ -71,7 +71,7 @@ void dalan_init(void) {
   _dalan_dflts(&dalan_opts);
 }
 
-/* Parses and coverts a data item.
+/* Parses and converts a data item.
    Returns 0 on success,
    -1 if the data was cut due to n limit,
    1 if a syntax error occurred

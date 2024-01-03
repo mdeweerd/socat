@@ -133,5 +133,5 @@ EOF
 make socat || exit 1
 
 # Done
-echo "Build finished, socat has been generated successfuly in out/socat"
+echo "Build finished, socat has been generated successfully in out/socat"
 

@@ -249,7 +249,7 @@ int xiocheckrange_ip6(struct sockaddr_in6 *pa, struct xiorange *range) {
 
 #if defined(HAVE_STRUCT_CMSGHDR) && defined(CMSG_DATA)
 /* provides info about the ancillary message:
-   converts the ancillary message in *cmsg into a form useable for further
+   converts the ancillary message in *cmsg into a form usable for further
    processing. knows the specifics of common message types.
    returns the number of resulting syntax elements in *num
    returns a sequence of \0 terminated type strings in *typbuff

@@ -104,7 +104,7 @@ dit(bf(tt(-h | -?)))
    types, and exit.
 dit(bf(tt(-hh | -??)))
    Like -h, plus a list of the short names of all available address options. Some options are
-   platform dependend, so this output is helpful for checking the particular
+   platform dependent, so this output is helpful for checking the particular
    implementation. 
 dit(bf(tt(-hhh | -???)))
    Like -hh, plus a list of all available address option names.
@@ -123,7 +123,7 @@ dit(bf(tt(-D)))
    Logs information about file descriptors before starting the transfer phase.
 label(option_experimental)dit(bf(tt(--experimental)))
    New features that are not well tested or are subject to change in the future
-   must me explicitely enabled using this option.
+   must me explicitly enabled using this option.
 dit(bf(tt(-ly[<facility>])))
    Writes messages to syslog instead of stderr; severity as defined with -d
    option. With optional link(<facility>)(TYPE_FACILITY), the syslog type can
@@ -750,7 +750,7 @@ label(ADDRESS_NAMED_PIPE)dit(bf(tt(PIPE:<filename>)))
    See also: link(unnamed pipe)(ADDRESS_UNNAMED_PIPE)
 label(ADDRESS_UNNAMED_PIPE)dit(bf(tt(PIPE)))
    Creates an unnamed pipe and uses it for reading and writing. It works as an
-   echo, because everything written to it appeares immediately as read
+   echo, because everything written to it appears immediately as read
    data.nl()
    Note: When socat tries to write more bytes than the pipe can queue (Linux
    2.4: 2048 bytes), socat might block. Consider, e.g., using
@@ -759,7 +759,7 @@ label(ADDRESS_UNNAMED_PIPE)dit(bf(tt(PIPE)))
    See also: link(named pipe)(ADDRESS_NAMED_PIPE), link(SOCKETPAIR)(ADDRESS_SOCKETPAIR)
 label(ADDRESS_SOCKETPAIR)dit(bf(tt(SOCKETPAIR)))
    Creates a socketpair and uses it for reading and writing. It works as an
-   echo, because everything written to it appeares immediately as read
+   echo, because everything written to it appears immediately as read
    data. The default socket type is datagram, so it keeps packet boundaries.
    nl()
    Option groups: link(FD)(GROUP_FD) nl()
@@ -1284,7 +1284,7 @@ label(ADDRESS_TCP6_LISTEN)dit(bf(tt(TCP6-LISTEN:<port>)))
    link(ipv6only)(OPTION_IPV6_V6ONLY)nl()
    Option groups: link(FD)(GROUP_FD),link(SOCKET)(GROUP_SOCKET),link(LISTEN)(GROUP_LISTEN),link(CHILD)(GROUP_CHILD),link(RANGE)(GROUP_RANGE),link(IP6)(GROUP_IP6),link(TCP)(GROUP_TCP),link(RETRY)(GROUP_RETRY) nl()
 label(ADDRESS_TUN)dit(bf(tt(TUN[:<if-addr>/<bits>])))
-   Creates a Linux TUN/TAP device and optionally assignes it the address and
+   Creates a Linux TUN/TAP device and optionally assigns it the address and
    netmask given by the parameters. The resulting network interface is almost
    ready for use by other processes; socat serves its "wire side". This address
    requires read and write access to the tunnel cloning device, usually
@@ -2130,7 +2130,7 @@ label(OPTION_SETGID)dit(bf(tt(setgid=<group>)))
    processing the address. This call might require root privilege. Please note
    that this option does not drop other group related privileges.
 label(OPTION_SETGID_EARLY)dit(bf(tt(setgid-early=<group>)))
-   Like link(setgit)(OPTION_SETGID) but is performed before opening the address.
+   Like link(setgid)(OPTION_SETGID) but is performed before opening the address.
 label(OPTION_SETUID)dit(bf(tt(setuid=<user>)))
    Changes the link(<user>)(TYPE_USER) (owner) of the process after processing
    the address. This call might require root privilege. Please note that this
@@ -2183,7 +2183,7 @@ label(OPTION_NOECHO)dit(bf(tt(noecho=<pattern>)))
    Specifies a regular pattern for a prompt that prevents the following input
    line from being displayed on the screen and from being added to the history.
    The prompt is defined as the text that was output to the readline address 
-   after the lastest newline character and before an input character was
+   after the last newline character and before an input character was
    typed. The pattern is a regular expression, e.g.
    "^[Pp]assword:.*$" or "([Uu]ser:|[Pp]assword:)". See NOEXPAND(regex(7)) for details.
    (link(example)(EXAMPLE_OPTION_NOECHO))
@@ -2362,7 +2362,7 @@ COMMENT(label(OPTION_SECURITYENCRYPTIONNETWORK)dit(bf(tt(securityencryptionnetwo
 COMMENT(label(OPTION_SECURITYENCRYPTIONTRANSPORT)dit(bf(tt(securityencryptiontransport)))
    Set the code(SO_SECURITY_ENCRYPTION_TRANSPORT) socket option.)
 COMMENT(label(OPTION_SIOCSPGRP)dit(bf(tt(siocspgrp=<pid_t>)))
-   Set the SIOCSPGRP with code(ioclt()) to enable SIGIO.)
+   Set the SIOCSPGRP with code(ioctl()) to enable SIGIO.)
 COMMENT(label(OPTION_USEIFBUFS)dit(bf(tt(useifbufs)))
    Set the code(SO_USE_IFBUFS) socket option.)
 label(OPTION_SO_TIMESTAMP)dit(bf(tt(so-timestamp)))
@@ -2564,7 +2564,7 @@ label(OPTION_AI_V4MAPPED)
 dit(bf(tt(ai-v4mapped[=0|1]))) dit(bf(tt(v4mapped[=0|1])))
    Sets or unsets the AI_V4MAPPED flag for code(getaddrinfo()). With socat()
    addresses requiring IPv6 addresses, this resolves IPv4 addresses to the
-   approriate IPv6 address [::ffff:*:*]. For IPv6 Socat addresses, the default
+   appropriate IPv6 address [::ffff:*:*]. For IPv6 Socat addresses, the default
    is 1.
 
 label(OPTION_RES_DEBUG)dit(bf(tt(res-debug)))
@@ -2826,7 +2826,7 @@ label(OPTION_PROXYPORT)dit(bf(tt(proxyport=<TCP service>)))
 label(OPTION_IGNORECR)dit(bf(tt(ignorecr)))
    The HTTP protocol requires the use of CR+NL as line terminator. When a proxy
    server violates this standard, socat might not understand its answer. 
-   This option directs socat to interprete NL as line terminator and
+   This option directs socat to interpret NL as line terminator and
    to ignore CR in the answer. Nevertheless, socat sends CR+NL to the proxy.
 label(OPTION_PROXY_AUTHORIZATION)dit(bf(tt(proxy-authorization=<username>:<password>)))
    Provide "basic" authentication to the proxy server. The argument to the
@@ -3055,7 +3055,7 @@ label(OPTION_TERMIOS_RAWER)dit(bf(tt(rawer)))
 label(OPTION_TERMIOS_CFMAKERAW)dit(bf(tt(cfmakeraw)))
    Sets raw mode by invoking tt(cfmakeraw()) or by simulating this call. This option implicitly turns off echo.
 label(OPTION_IGNBRK)dit(bf(tt(ignbrk[=<bool>])))
-   Ignores or interpretes the BREAK character (e.g., ^C)
+   Ignores or interprets the BREAK character (e.g., ^C)
 label(OPTION_BRKINT)dit(bf(tt(brkint[=<bool>])))
 label(OPTION_BS0)dit(bf(tt(bs0)))
 label(OPTION_BS1)dit(bf(tt(bs1)))
@@ -3336,7 +3336,7 @@ label(OPTION_OPENSSL_PSEUDO)dit(bf(tt(pseudo)))
    gathering daemon can be utilized, this option activates a mechanism for
    providing pseudo entropy. This is achieved by taking the current time in
    microseconds for feeding the libc pseudo random number generator with an
-   initial value. openssl is then feeded with output from NOEXPAND(random()) calls.nl()
+   initial value. openssl is then fed with output from NOEXPAND(random()) calls.nl()
    NOTE:This mechanism is not sufficient for generation of secure keys!
 label(OPTION_OPENSSL_COMPRESS)dit(bf(tt(compress)))
    Enable or disable the use of compression for a connection. Setting this to
@@ -3572,10 +3572,10 @@ label(TYPE_LONG)dit(long)
 label(TYPE_LONGLONG)dit(long long)
    A number read with code(strtoll()). The value must fit into a C long long.
 label(TYPE_OFF)dit(off_t)
-   An implementation dependend signed number, usually 32 bits, read with strtol
+   An implementation dependent signed number, usually 32 bits, read with strtol
    or strtoll.
 label(TYPE_OFF64)dit(off64_t)
-   An implementation dependend signed number, usually 64 bits, read with strtol
+   An implementation dependent signed number, usually 64 bits, read with strtol
    or strtoll.
 label(TYPE_MODE_T)dit(mode_t)
    An unsigned integer, read with code(strtoul()), specifying mode (permission)

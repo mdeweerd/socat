@@ -762,7 +762,7 @@ int socat(const char *address1, const char *address2) {
       int i;
       for (i = 0; i < NUMUNKNOWN; ++i) {
 	 if (XIO_RDSTREAM(sock1)->para.exec.pid == diedunknown[i]) {
-	    /* child has alread died... but it might have put regular data into
+	    /* child has already died... but it might have put regular data into
 	       the communication channel, so continue */
 	    Info2("child "F_pid" has already died with status %d",
 		  XIO_RDSTREAM(sock1)->para.exec.pid, statunknown[i]);
@@ -805,7 +805,7 @@ int socat(const char *address1, const char *address2) {
       int i;
       for (i = 0; i < NUMUNKNOWN; ++i) {
 	 if (XIO_RDSTREAM(sock2)->para.exec.pid == diedunknown[i]) {
-	    /* child has alread died... but it might have put regular data into
+	    /* child has already died... but it might have put regular data into
 	       the communication channel, so continue */
 	    Info2("child "F_pid" has already died with status %d",
 		  XIO_RDSTREAM(sock2)->para.exec.pid, statunknown[i]);
@@ -1507,7 +1507,7 @@ int xiotransfer(xiofile_t *inpipe, xiofile_t *outpipe,
 		  }
 		  fputs("  ", stderr);
 
-		  /* print acsii */
+		  /* print ascii */
 		  t = s;
 		  i = 0;
 		  while (i < j) {

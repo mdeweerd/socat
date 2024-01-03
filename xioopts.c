@@ -3320,7 +3320,7 @@ int retropt_bind(struct opt *opts,
 	 }
       }
 
-      /* Set AI_PASSIVE, except when it is explicitely disabled */
+      /* Set AI_PASSIVE, except when it is explicitly disabled */
       ai_flags2[0] = ai_flags[0];
       ai_flags2[1] = ai_flags[1];
       if (!(ai_flags2[1] & AI_PASSIVE))

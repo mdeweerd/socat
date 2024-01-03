@@ -32,7 +32,7 @@ compilation
 * gatherinfo.sh: shell script for gathering info about platform and socat
 implementation
 
-* server.pem: a self signed test cerificate, for self test only
+* server.pem: a self signed test certificate, for self test only
 
 
 The source code system:

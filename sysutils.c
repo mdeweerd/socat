@@ -548,7 +548,7 @@ int getusergroups(const char *user, gid_t *list, int *ngroups) {
    /* we prefer getgrouplist because it may be much faster with many groups, but it is not standard */
    gid_t grp, twogrps[2];
    int two = 2;
-   /* getgrouplist requires to pass an extra group id, typically the users primary group, that is then added to the supplementary group list. We don't want such an additional group in the result, but there is not "unspecified" gid value available. Thus we try to find an abitrary supplementary group id that we then pass in a second call to getgrouplist. */
+   /* getgrouplist requires to pass an extra group id, typically the users primary group, that is then added to the supplementary group list. We don't want such an additional group in the result, but there is not "unspecified" gid value available. Thus we try to find an arbitrary supplementary group id that we then pass in a second call to getgrouplist. */
    grp = 0;
    Getgrouplist(user, grp, twogrps, &two);
    if (two == 1) {
