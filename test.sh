@@ -55,10 +55,10 @@ usage() {
 val_t=0.1
 NUMCOND=true
 #NUMCOND="test \$N -gt 70"
-VERBOSE=
-DEBUG=
-INTERNET=
-OPT_EXPECT_FAIL= EXPECT_FAIL=
+VERBOSE=""
+DEBUG=""
+INTERNET=""
+OPT_EXPECT_FAIL="" EXPECT_FAIL=""
 while [ "$1" ]; do
     case "X$1" in
 	X-h)   usage; exit 0 ;;
@@ -127,12 +127,12 @@ OPTS="$opt_t $OPTS"
 opts="$OPTS"
 
 TESTS="$*"; export TESTS
-if ! SOCAT_MAIN_WAIT= $SOCAT -V >/dev/null 2>&1; then
+if ! SOCAT_MAIN_WAIT="" $SOCAT -V >/dev/null 2>&1; then
     echo "Failed to execute $SOCAT, exiting" >&2
     exit 1
 fi
 
-SOCAT_VERSION=$(SOCAT_MAIN_WAIT= $SOCAT -V |head -n 2 |tail -n 1 |sed 's/.* \([0-9][1-9]*\.[0-9][0-9]*\.[0-9][^[:space:]]*\).*/\1/')
+SOCAT_VERSION=$(SOCAT_MAIN_WAIT="" $SOCAT -V |head -n 2 |tail -n 1 |sed 's/.* \([0-9][1-9]*\.[0-9][0-9]*\.[0-9][^[:space:]]*\).*/\1/')
 if [ -z "$SOCAT_VERSION" ]; then
     echo "Warning: failed to retrieve Socat version" >&2
 fi
@@ -749,7 +749,7 @@ testfeats () {
     local a A;
     for a in $@; do
 	A=$(echo "$a" |tr 'a-z-' 'A-Z_')
-	if SOCAT_MAIN_WAIT= $SOCAT -V |grep "#define WITH_$A 1\$" >/dev/null; then
+	if SOCAT_MAIN_WAIT="" $SOCAT -V |grep "#define WITH_$A 1\$" >/dev/null; then
 	    if [[ "$A" =~ OPENSSL.* ]]; then
 		gentestcert testsrv
 		gentestcert testcli
@@ -1693,8 +1693,12 @@ waitfile () {
     [ "$logic" -eq 2 ] && crit=-s
     [ "$timeout" ] || timeout=5
     while [ $timeout -gt 0 ]; do
-	if [ \( $logic -ne 0 -a $crit "$file" \) -o \
-	    \( $logic -eq 0 -a ! $crit "$file" \) ]; then
+        cond=0
+        # shellcheck disable=SC1009,SC1072,SC1073
+	[ $logic -ne 0 ] && [ $crit "$file" ] && cond=1
+        # shellcheck disable=SC1009,SC1072,SC1073
+        [ $logic -eq 0 ] && ! [ $crit "$file" ] && cond=1
+	if  [ $cond ] ; then
 	    set ${vx}vx
 	    return 0
 	fi
@@ -14838,19 +14842,19 @@ case "$entry" in
     denied)      pid0=; rm -f $ts; touch $ts; chmod 000 $ts ;;
     directory)   pid0=; mkdir -p $ts ;;
     orphaned)    pid0= 	# the remainder of a UNIX socket in FS
-		 SOCAT_MAIN_WAIT= $SOCAT $opts UNIX-LISTEN:$ts,unlink-close=0 /dev/null >${tf}0 2>${te}0 &
+		 SOCAT_MAIN_WAIT="" $SOCAT $opts UNIX-LISTEN:$ts,unlink-close=0 /dev/null >${tf}0 2>${te}0 &
 		 waitunixport $ts 1
-		 SOCAT_MAIN_WAIT= $SOCAT $opts /dev/null UNIX-CONNECT:$ts >>${tf}0 2>>${te}0
+		 SOCAT_MAIN_WAIT="" $SOCAT $opts /dev/null UNIX-CONNECT:$ts >>${tf}0 2>>${te}0
 		 ;;
     file)        pid0=; rm -f $ts; touch $ts ;;
     stream)      CMD0="$SOCAT $opts UNIX-LISTEN:$ts /dev/null"
-		 SOCAT_MAIN_WAIT= $CMD0 >${tf}0 2>${te}0 &
+		 SOCAT_MAIN_WAIT="" $CMD0 >${tf}0 2>${te}0 &
 		 pid0=$! ;;
     dgram)       CMD0="$SOCAT $opts -u UNIX-RECV:$ts /dev/null"
-		 SOCAT_MAIN_WAIT= $CMD0 >${tf}0 2>${te}0 &
+		 SOCAT_MAIN_WAIT="" $CMD0 >${tf}0 2>${te}0 &
 		 pid0=$! ;;
     seqpacket)   CMD0="$SOCAT $opts UNIX-LISTEN:$ts,socktype=$SOCK_SEQPACKET /dev/null"
-		 SOCAT_MAIN_WAIT= $CMD0 >${tf}0 2>${te}0 &
+		 SOCAT_MAIN_WAIT="" $CMD0 >${tf}0 2>${te}0 &
 		 pid0=$! ;;
 esac
 [ "$pid0" ] && waitunixport $ts 1

@@ -18,12 +18,15 @@ PROMPT='prog> '
 CREDUSER="user"
 CREDPASS="password"
 
-if   [ $(echo "x\c") = "x" ]; then ECHO="echo"
-elif [ $(echo -e "x\c") = "x" ]; then ECHO="echo -e"
+# shellcheck disable=SC2116
+if   [ "$(echo "x\c")" = "x" ]; then ECHO="echo"
+elif [ "$(echo -e "x\c")" = "x" ]; then ECHO="echo -e"
 fi
 
 #trap "$ECHO $0 got SIGINT"  INT
+# shellcheck disable=SC2064
 trap "$ECHO $0 got SIGINT"  INT
+# shellcheck disable=SC2064
 trap "$ECHO $0 got SIGQUIT" QUIT
 
 # print banner
@@ -34,9 +37,9 @@ $ECHO "$USERPROMPT\c"; read -r USERNAME
 $ECHO "$PWDPROMPT\c"; read -rs PASSWORD
 $ECHO
 
-if [ "$USERNAME" != "$CREDUSER" -o "$PASSWORD" != "$CREDPASS" ]; then
+if [ "$USERNAME" != "$CREDUSER" ] || [ "$PASSWORD" != "$CREDPASS" ]; then
     $ECHO "Authentication failed" >&2
-    exit -1
+    exit 1
 fi
 
 while $ECHO "$PROMPT\c"; read -r COMMAND; do

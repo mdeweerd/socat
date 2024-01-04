@@ -20,8 +20,9 @@ if [ -z "$SOCAT" ]; then
     fi
 fi
 
-if   [ $(echo "x\c") = "x" ]; then E=""
-elif [ $(echo -e "x\c") = "x" ]; then E="-e"
+# shellcheck disable=SC2116
+if   [ "$(echo "x\c")" = "x" ]; then E=""
+elif [ "$(echo -e "x\c")" = "x" ]; then E="-e"
 else
     echo "cannot suppress trailing newline on echo" >&2
     exit 1
@@ -30,13 +31,14 @@ ECHO="echo $E"
 CR=$($ECHO "\r")
 #echo "CR=$($ECHO "$CR\c" |od -c)" >&2
 
-case `uname` in
+# shellcheck disable=SC2034
+case $(uname) in
 HP-UX|OSF1)
     # their cats are too stupid to work with unix domain sockets
     CAT="$SOCAT -u stdin stdout"
     ;;
 *)
-    CAT=cat
+    CAT="cat"
     ;;
 esac
 
@@ -86,8 +88,9 @@ $ECHO "HTTP/1.0${SPACES}200 OK$CR"
 $ECHO "$CR"
 
 # perform proxy (relay) function
+# shellcheck disable=SC2086
 $SOCAT $SOCAT_OPTS - tcp:$a || {
     $ECHO "HTTP/1.0${SPACES}500 Failed to connect to $a$CR"
-    $ECHO $CR
+    $ECHO "$CR"
 }
 

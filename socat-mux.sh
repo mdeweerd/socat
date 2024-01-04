@@ -35,7 +35,7 @@ usage () {
     $ECHO "\t-b|-S|-t|-T|-l <arg>\tThese options are passed to Socat processes"
 }
 
-VERBOSE= QUIET= OPTS=
+VERBOSE="" QUIET="" OPTS=""
 while [ "$1" ]; do
     case "X$1" in
 	X-h) usage; exit ;;
@@ -55,7 +55,7 @@ done
 LISTENER="$1"
 TARGET="$2"
 
-if [ -z "$LISTENER" -o -z "$TARGET" ]; then
+if [ -z "$LISTENER" ] || [ -z "$TARGET" ]; then
     echo "$0: Missing parameter(s)" >&2
     usage >&2
     exit 1
@@ -73,7 +73,7 @@ esac
 
 PORT1=$($SOCAT -d -d -T 0.000001 UDP4-RECV:0 /dev/null 2>&1 |grep bound |sed 's/.*:\([1-9][0-9]*\)$/\1/')
 PORT2=$($SOCAT -d -d -T 0.000001 UDP4-RECV:0 /dev/null 2>&1 |grep bound |sed 's/.*:\([1-9][0-9]*\)$/\1/')
-if [ -z "$PORT1" -o -z "$PORT2" ]; then
+if [ -z "$PORT1" ] || [ -z "$PORT2" ]; then
     echo "$0: Failed to determine free UDP ports" >&2
     exit 1
 fi
@@ -85,7 +85,7 @@ IFADDR=127.0.0.1
 BCADDR=127.255.255.255
 
 
-pid1= pid2=
+pid1="" pid2=""
 trap '[ "$pid1" ] && kill $pid1 2>/dev/null; [ "$pid2" ] && kill $pid2 2>/dev/null' EXIT
 
 set -bm
@@ -96,6 +96,7 @@ if [ "$VERBOSE" ]; then
 	\"$TARGET\" \\
 	\"UDP4-DATAGRAM:$BCADDR:$PORT2,bind=$IFADDR:$PORT1,so-broadcast\" &"
 fi
+# shellcheck disable=SC2086
 $SOCAT -lp muxfwd $OPTS \
     "$TARGET" \
     "UDP4-DATAGRAM:$BCADDR:$PORT2,bind=$IFADDR:$PORT1,so-broadcast" &
@@ -106,6 +107,7 @@ if [ "$VERBOSE" ]; then
     	\"$LISTENER\" \\
         \"UDP4-DATAGRAM:$IFADDR:$PORT1,bind=:$PORT2,so-broadcast,so-reuseaddr\" &"
 fi
+# shellcheck disable=SC2086
 $SOCAT -lp muxlst $OPTS \
     "$LISTENER" \
     "UDP4-DATAGRAM:$IFADDR:$PORT1,bind=:$PORT2,so-broadcast,so-reuseaddr" &

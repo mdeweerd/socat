@@ -23,12 +23,13 @@ PIDFILE=/var/run/socat-$INPORT.pid
 OPTS="-d -d -lm"	# notice to stderr, then to syslog
 SOCAT=/usr/local/bin/socat
 
-if [ "$1" = "start" -o -z "$1" ]; then
+if [ "$1" = "start" ] || [ -z "$1" ]; then
 
+    # shellcheck disable=SC2086
     $SOCAT $OPTS tcp-l:$INPORT,bind=$INIF,$INOPTS tcp:$TARGET:$DSTPORT,bind=$OUTIF,$OUTOPTS </dev/null &
     echo $! >$PIDFILE
 
 elif [ "$1" = "stop" ]; then
 
-    /bin/kill $(/bin/cat $PIDFILE)
+    /bin/kill "$(/bin/cat "$PIDFILE")"
 fi

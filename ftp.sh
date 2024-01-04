@@ -1,4 +1,5 @@
 #! /bin/sh
+# shellcheck disable=SC2317
 # source: ftp.sh
 # Copyright Gerhard Rieger and contributors (see file CHANGES)
 # Published under the GNU General Public License V.2, see file COPYING
@@ -72,21 +73,24 @@ dir="$2"
 
 echo "addr=$method:$server:21,$addropts"; exit
 
+
 ### this is the central part to establish communication with socat ###
 ### copy these lines to make new communication shell scripts 
 TMPDIR=$(if [ -x /bin/mktemp ]; then
-	    /bin/mktemp -d /tmp/$USER/FTPSH.XXXXXX
+	    /bin/mktemp -d "/tmp/$USER/FTPSH.XXXXXX"
 	 else
-	    (umask 077; d=/tmp/$USER/FTPSH.$$; mkdir $d; echo $d)
+	    (umask 077; d="/tmp/$USER/FTPSH.$$"; mkdir "$d"; echo "$d")
 	 fi)
 TO="$TMPDIR/to"; FROM="$TMPDIR/from"
+# shellcheck disable=SC2086
 socat $SO1 fifo:$TO,nonblock,ignoreeof!!fifo:$FROM $method:$server:21,$addropts &
 S1=$!
-while ! [ -p "$TO" -a -p "$FROM" ]; do sleep 1; done
-exec 4>$TMPDIR/to 3<$TMPDIR/from
+while ! [ -p "$TO" ] || ! [ -p "$FROM" ] ; do sleep 1; done
+exec 4>"$TMPDIR/to" 3<"$TMPDIR/from"
 trap "S1=" 17
 #trap "echo cleaning up...>&2; rm -r $TMPDIR; [ -n "$S1" ] && kill $S1" 0 3
-trap "rm -r $TMPDIR" 0 3
+# shellcheck disable=SC2064
+trap "rm -r '$TMPDIR'" 0 3
 ### here the central part ends
 
 
@@ -102,7 +106,7 @@ ftp_chat () {
     #echo "got \"$status $message\"" >&2
     if [ -z "$status" ]; then  echo ftp data connection failed >&2; exit;  fi
     if [ "$status" -ge "$errlevel" ]; then
-	echo $message >&2
+	echo "$message" >&2
 	echo "QUIT" >&4; exit 1
     fi
 set +vx
@@ -125,7 +129,7 @@ esac
       
 echo "PASV" >&4; read status message <&3
 info=$(expr "$message" : '.*[^0-9]\([0-9]*,[0-9]*,[0-9]*,[0-9]*,[0-9]*,[0-9]*\).*')
-echo $info |tr ',' ' ' |(read i1 i2 i3 i4 p1 p2 
+echo "$info" |tr ',' ' ' |(read i1 i2 i3 i4 p1 p2 
 
     addr=$i1.$i2.$i3.$i4
     port=$(echo "256*$p1+$p2" |bc)
@@ -133,6 +137,7 @@ echo $info |tr ',' ' ' |(read i1 i2 i3 i4 p1 p2
 
     trap : 20
     # open data connection and transfer data
+    # shellcheck disable=SC2086
     socat -u $SO2 $method:$server:$port,$addropts -
 ) &
 S2=$!
@@ -143,16 +148,16 @@ case "$dir" in
 *) ftp_chat "RETR $dir" ;;
 esac
 case "$status" in
-    [45]*) kill $S2;;
+    [45]*) kill "$S2";;
 esac
 
 #echo "waiting for process $S2 to terminate" >&2
-wait $S2
+wait "$S2"
 
 ftp_chat
 
 ftp_chat "QUIT"
 
 #echo "waiting for process $S1 to terminate" >&2
-wait $S1
+wait "$S1"
 exit

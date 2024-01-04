@@ -69,7 +69,7 @@ usage () {
 
 LOCALHOST=127.0.0.1
 
-VERBOSE= QUIET= OPTS=
+VERBOSE="" QUIET="" OPTS=""
 while [ "$1" ]; do
     case "X$1" in
 	X-h) usage; exit ;;
@@ -90,7 +90,7 @@ ARG0="$1"
 ARG1="$2"
 ARG2="$3"
 
-if [ -z "$ARG0" -o  -z "$ARG1" -o -z "$ARG2" ]; then
+if [ -z "$ARG0" ] || [ -z "$ARG1" ] || [ -z "$ARG2" ]; then
     echo "$0: Three addresses required" >&2
     usage >&2
     exit 1
@@ -109,7 +109,7 @@ mkprogname () {
 	NAME="$ARG"
     fi
     NAME="${NAME,,*}"
-    echo $NAME
+    echo "$NAME"
 }
 
 
@@ -226,10 +226,11 @@ fi
 ADDR2B="$ARG2"
 
 
-pid1= pid2=
+pid1="" pid2=""
 trap '[ "$pid1" ] && kill $pid1 2>/dev/null; [ "$pid2" ] && kill $pid2 2>/dev/null' EXIT
 
 set -bm
+# shellcheck disable=SC2154
 trap 'rc=$?; if ! kill -n 0 $pid2 2>/dev/null; then [ -z "$QUIET" -a $rc -ne 0 ] && echo "$0: socat-$NAME2 exited with rc=$rc" >&2; exit $rc; fi' SIGCHLD
 
 # Start instance 2 first, because instance 1 ("left") connects to 2
@@ -238,6 +239,7 @@ if [ "$VERBOSE" ]; then
 	\"$ADDR2A\" \\
 	\"$ADDR2B\" &"
 fi
+# shellcheck disable=SC2086
 $SOCAT $OPTS -lp socat-$NAME2 \
 	"$ADDR2A" \
 	"$ADDR2B" &
@@ -251,6 +253,7 @@ if [ "$VERBOSE" ]; then
 	\"$ADDR1A\" \\
 	\"$ADDR1B\""
 fi
+# shellcheck disable=SC2086
 $SOCAT $OPTS -lp socat-$NAME1 \
 	"$ADDR1A" \
 	"$ADDR1B"

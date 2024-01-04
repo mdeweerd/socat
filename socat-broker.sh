@@ -29,8 +29,9 @@ usage () {
     $ECHO "Data sent by any client is forwarded to all other clients"
 }
 
-VERBOSE= QUIET= OPTS=
+VERBOSE="" QUIET="" OPTS=""
 while [ "$1" ]; do
+    # shellcheck disable=SC2034
     case "X$1" in
 	X-h) usage; exit ;;
 	X-V) VERBOSE=1 ;;
@@ -77,6 +78,7 @@ if [ "$VERBOSE" ]; then
 	$LISTENER \
 	UDP4-DATAGRAM:$BCADDR:$PORT,bind=:$PORT,so-broadcast,so-reuseaddr"
 fi	
+# shellcheck disable=SC2086
 $SOCAT -lp socat-broker $OPTS \
     "$LISTENER" \
     "UDP4-DATAGRAM:$BCADDR:$PORT,bind=:$PORT,so-broadcast,so-reuseaddr"

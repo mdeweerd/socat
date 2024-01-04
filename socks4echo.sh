@@ -1,4 +1,5 @@
 #! /usr/bin/env bash
+# shellcheck disable=SC2116
 # source: socks4echo.sh
 
 # Copyright Gerhard Rieger and contributors (see file CHANGES)
@@ -24,24 +25,24 @@ else
     SOCAT=./socat
 fi
 
-case `uname` in
+case $(uname) in
 HP-UX|OSF1)
     CAT="$SOCAT -u stdin stdout"
     ;;
 *)
-    CAT=cat
+    CAT="cat"
     ;;
 esac
 
-if   [ $(echo "x\c") = "x" ]; then E=""
-elif [ $(echo -e "x\c") = "x" ]; then E="-e"
+if   [ "$(echo "x\c")" = "x" ]; then E=""
+elif [ "$(echo -e "x\c")" = "x" ]; then E="-e"
 else
     echo "cannot suppress trailing newline on echo" >&2
     exit 1
 fi
 ECHO="echo $E"
 
-if [ $($ECHO "\0101") = "A" ]; then
+if [ "$($ECHO "\0101")" = "A" ]; then
     SOCKSREPLY_FAILED="\0\0133\0\0\0\0\0\0\c"
     SOCKSREPLY_OK="\0\0132\0\0\0\0\0\0\c"
 else
@@ -55,7 +56,7 @@ if [ "$HAVE_READ_N" ]; then
 else
     vn=$(dd bs=1 count=1 2>/dev/null)
 fi
-if [ "$vn" != $($ECHO "\04") ]; then
+if [ "$vn" != "$($ECHO "\04")" ]; then
     $ECHO "$SOCKSREPLY_FAILED"
     echo "invalid socks version requested" >&2
     exit
@@ -66,7 +67,7 @@ if [ "$HAVE_READ_N" ]; then
 else
     cd=$(dd bs=1 count=1 2>/dev/null)
 fi
-if [ "$cd" != $($ECHO "\01") ]; then
+if [ "$cd" != "$($ECHO "\01")" ]; then
     $ECHO "$SOCKSREPLY_FAILED"
     echo "invalid socks operation requested" >&2
     exit

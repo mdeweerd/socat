@@ -15,16 +15,16 @@ while true; do
     esac
 done
 
-PROGRAM="$@"
+PROGRAM="$*"
 if [ "$withhistfile" ]; then
     HISTFILE="$HOME/.$1_history"
     HISTOPT=",history=$HISTFILE"
 else
     HISTOPT=
 fi
-mkdir -p /tmp/$USER || exit 1
+mkdir -p "/tmp/$USER" || exit 1
 #
 #
 
-exec socat -d readline"$HISTOPT",noecho='[Pp]assword:' exec:"$PROGRAM",sigint,pty,setsid,ctty,raw,echo=0,stderr 2>/tmp/$USER/stderr2
+exec socat -d readline"$HISTOPT",noecho='[Pp]assword:' exec:"$PROGRAM",sigint,pty,setsid,ctty,raw,echo=0,stderr 2>"/tmp/$USER/stderr2"
 

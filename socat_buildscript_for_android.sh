@@ -17,23 +17,23 @@ fi
 
 # Extract the Android toolchain from NDK
 ANDROID_PLATFORM="android-3"
-ROOT="`pwd`"
+ROOT="$(pwd)"
 OUT="${ROOT}/out"
-${ANDROID_NDK}/build/tools/make-standalone-toolchain.sh \
+"${ANDROID_NDK}/build/tools/make-standalone-toolchain.sh" \
  --ndk-dir="${ANDROID_NDK}" \
  --platform="${ANDROID_PLATFORM}" \
  --install-dir="${OUT}/toolchain" \
  || exit 1
 # Remove resolv.h because it is quite unusable as is
-rm ${OUT}/toolchain/sysroot/usr/include/resolv.h
+rm "${OUT}/toolchain/sysroot/usr/include/resolv.h"
 
 # Create configure script
-cd ${ROOT}
+cd "${ROOT}" || exit 1
 autoconf || exit 1
 
 # Create config.h and Makefile
-cd ${OUT}
-${ROOT}/configure \
+cd "${OUT}" || exit 1
+"${ROOT}/configure" \
  --host \
  --disable-openssl \
  --disable-unix \
@@ -42,6 +42,7 @@ ${ROOT}/configure \
 
 # Replace misconfigured values in config.h and enable PTY functions
 mv config.h config.old
+# shellcheck disable=SC2002
 cat config.old \
  | sed 's/CRDLY_SHIFT.*/CRDLY_SHIFT 9/' \
  | sed 's/TABDLY_SHIFT.*/TABDLY_SHIFT 11/' \
@@ -52,7 +53,7 @@ cat config.old \
 
 # Enable openpty() in Makefile
 mv Makefile Makefile.old
-cat Makefile.old | sed 's/error.c/error.c openpty.c/' > Makefile
+sed 's/error.c/error.c openpty.c/' < Makefile.old > Makefile
 
 # Provide openpty.c
 cat >openpty.c <<EOF
